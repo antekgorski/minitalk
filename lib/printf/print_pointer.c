@@ -1,23 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   print_pointer.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agorski <agorski@student.42.fr>            +#+  +:+       +#+        */
+/*   By: agorski <agorski@student.42warsaw.pl>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/30 19:02:08 by agorski           #+#    #+#             */
-/*   Updated: 2024/06/30 19:56:06 by agorski          ###   ########.fr       */
+/*   Created: 2024/04/30 12:20:44 by agorski           #+#    #+#             */
+/*   Updated: 2024/04/30 23:36:54 by agorski          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
+#include "ft_printf.h"
 
-# include "./lib/printf/ft_printf.h"
-# include "./lib/printf/libft/libft.h"
-# include <signal.h>
-# include <stdio.h>
-# include <sys/types.h>
-# include <unistd.h>
+int	print_pointer(void *ptr)
+{
+	int		len;
+	char	x;
 
-#endif
+	len = 0;
+	x = 'x';
+	if (!ptr)
+		return (write(1, "(nil)", 5));
+	len += write(1, "0x", 2);
+	len += print_hex((unsigned long int)ptr, x);
+	return (len);
+}

@@ -1,23 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agorski <agorski@student.42.fr>            +#+  +:+       +#+        */
+/*   By: agorski <agorski@student.42warsaw.pl>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/30 19:02:08 by agorski           #+#    #+#             */
-/*   Updated: 2024/06/30 19:56:06 by agorski          ###   ########.fr       */
+/*   Created: 2024/04/07 01:22:40 by agorski           #+#    #+#             */
+/*   Updated: 2024/04/07 14:40:02 by agorski          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
+#include "libft.h"
 
-# include "./lib/printf/ft_printf.h"
-# include "./lib/printf/libft/libft.h"
-# include <signal.h>
-# include <stdio.h>
-# include <sys/types.h>
-# include <unistd.h>
-
-#endif
+void	ft_lstdelone(t_list *lst, void (*del)(void *))
+{
+	if (!lst || !del)
+		return ;
+	del(lst->content);
+	free(lst);
+}
