@@ -6,7 +6,7 @@
 /*   By: agorski <agorski@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 18:28:03 by agorski           #+#    #+#             */
-/*   Updated: 2024/06/30 20:59:11 by agorski          ###   ########.fr       */
+/*   Updated: 2024/07/01 14:11:25 by agorski          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,20 +37,14 @@ void	handle_signals(int signum)
 
 int	main(void)
 {
-	pid_t	pid;
-	struct sigaction sa;
+	pid_t				pid;
+	struct sigaction	sa;
 
-	// (void)av;
-	// if (ac != 1)
-	// 	ft_printf("Error\nTry: ./server\n");
 	pid = getpid();
 	ft_printf("PID: %d\n", pid);
 	ft_printf("Waiting for message...\n");
-	sa.sa_handler = handle_signals;
-	sigemptyset(&sa.sa_mask);
-	sa.sa_flags = 0;
-	sigaction(SIGUSR1, &sa, NULL);
-	sigaction(SIGUSR2, &sa, NULL);
+	signal(SIGUSR1, handle_signals);
+	signal(SIGUSR2, handle_signals);
 	while (1)
 	{
 	}
