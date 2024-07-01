@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   server.c                                           :+:      :+:    :+:   */
+/*   server_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: agorski <agorski@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/30 18:28:03 by agorski           #+#    #+#             */
-/*   Updated: 2024/07/01 14:11:25 by agorski          ###   ########.fr       */
+/*   Created: 2024/07/01 19:19:04 by agorski           #+#    #+#             */
+/*   Updated: 2024/07/01 19:30:30 by agorski          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk.h"
+#include "../inc/minitalk_bonus.h"
 
 void	handle_signals(int signum)
 {
@@ -37,8 +37,7 @@ void	handle_signals(int signum)
 
 int	main(void)
 {
-	pid_t				pid;
-	struct sigaction	sa;
+	pid_t	pid;
 
 	pid = getpid();
 	ft_printf("PID: %d\n", pid);

@@ -6,11 +6,11 @@
 /*   By: agorski <agorski@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 18:09:24 by agorski           #+#    #+#             */
-/*   Updated: 2024/06/30 20:23:38 by agorski          ###   ########.fr       */
+/*   Updated: 2024/07/01 18:27:20 by agorski          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk.h"
+#include "../inc/minitalk.h"
 
 void	send_char(pid_t server_pid, char c)
 {
