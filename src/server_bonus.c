@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   server_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agorski <agorski@student.42.fr>            +#+  +:+       +#+        */
+/*   By: agorski <agorski@student.42warsaw.pl>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 19:19:04 by agorski           #+#    #+#             */
-/*   Updated: 2024/07/01 19:30:30 by agorski          ###   ########.fr       */
+/*   Updated: 2024/07/02 02:05:43 by agorski          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,18 @@ void	handle_signals(int signum)
 int	main(void)
 {
 	pid_t	pid;
+	// struct sigaction sa;
 
 	pid = getpid();
 	ft_printf("PID: %d\n", pid);
 	ft_printf("Waiting for message...\n");
+	
+	// sa.sa_handler = handle_signals;
+	// sigemptyset(&sa.sa_mask);
+	// sa.sa_flags = 0;
+	// sigaction(SIGUSR1, &sa, NULL);
+	// sigaction(SIGUSR2, &sa, NULL);
+	
 	signal(SIGUSR1, handle_signals);
 	signal(SIGUSR2, handle_signals);
 	while (1)

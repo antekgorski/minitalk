@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   client_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agorski <agorski@student.42.fr>            +#+  +:+       +#+        */
+/*   By: agorski <agorski@student.42warsaw.pl>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 19:18:15 by agorski           #+#    #+#             */
-/*   Updated: 2024/07/01 19:30:21 by agorski          ###   ########.fr       */
+/*   Updated: 2024/07/01 23:51:34 by agorski          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	send_char(pid_t server_pid, char c)
 			kill(server_pid, SIGUSR1);
 		else
 			kill(server_pid, SIGUSR2);
-		usleep(10);
+		usleep(100);
 		bit_count++;
 	}
 }
