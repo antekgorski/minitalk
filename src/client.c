@@ -6,7 +6,7 @@
 /*   By: agorski <agorski@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 18:09:24 by agorski           #+#    #+#             */
-/*   Updated: 2024/07/03 16:04:14 by agorski          ###   ########.fr       */
+/*   Updated: 2024/07/04 01:53:38 by agorski          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,15 +35,9 @@ int	send_pid(pid_t server_pid, pid_t client_pid)
 	while (bit_count >= 0)
 	{
 		if ((client_pid & (1 << bit_count)) != 0)
-		{
 			kill(server_pid, SIGUSR1);
-			usleep(1000);
-		}
 		else
-		{
 			kill(server_pid, SIGUSR2);
-			usleep(1000);
-		}
 		usleep(1000);
 		bit_count--;
 	}
@@ -52,7 +46,7 @@ int	send_pid(pid_t server_pid, pid_t client_pid)
 	{
 		usleep(100);
 		if (++i == 30000)
-			return (write(1, "server don't recive\n", 20), 0);
+			return (ft_printf("server don't recive\n"), 0);
 	}
 	if (server_reply == 1)
 		ft_printf("Server received client PID: %d\n", client_pid);
@@ -61,7 +55,7 @@ int	send_pid(pid_t server_pid, pid_t client_pid)
 
 void	send_char(pid_t server_pid, char c)
 {
-	int	bit_count;
+	static int	bit_count;
 
 	bit_count = 0;
 	while (bit_count < 8)
@@ -69,7 +63,7 @@ void	send_char(pid_t server_pid, char c)
 		server_reply = 0;
 		if ((c & (1 << bit_count)) != 0)
 			kill(server_pid, SIGUSR1);
-		else
+		else if ((c & (0 << bit_count)) == 0)
 			kill(server_pid, SIGUSR2);
 		while (!server_reply)
 		{
@@ -98,19 +92,14 @@ int	main(int ac, char **av)
 		{
 			server_reply = 0;
 			send_char(server_pid, *message);
-			message++;
+			usleep(10);
 			while (!server_reply)
-			{
 				usleep(1000);
-			}
+			message++;
 		}
-		// send_char(server_pid, '\n');
 		send_char(server_pid, '\0');
 	}
 	else
-	{
-		write(1, "Error Try: ./client [server_pid] [message]\n", 43);
-		return (1);
-	}
+		return ((write(1, "Try: ./client [server_pid] [message]\n", 37)), 1);
 	return (0);
 }
