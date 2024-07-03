@@ -3,23 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   server.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agorski <agorski@student.42warsaw.pl>      +#+  +:+       +#+        */
+/*   By: agorski <agorski@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 18:28:03 by agorski           #+#    #+#             */
-/*   Updated: 2024/07/03 00:07:14 by agorski          ###   ########.fr       */
+/*   Updated: 2024/07/03 16:27:32 by agorski          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minitalk.h"
-#include <stdio.h>
 
 void	handle_signals(int signum)
 {
 	static int	character;
 	static int	bit_count = sizeof(pid_t) * 8 - 1;
 	static int	client_pid;
+	static int	char_bit_count;
 	static int	reciving_pid = 1;
-	static int char_bit_count;
 
 	if (reciving_pid)
 	{
@@ -31,19 +30,35 @@ void	handle_signals(int signum)
 		{
 			reciving_pid = 0;
 			kill(client_pid, SIGUSR2);
-			printf("Recived client PID: %d\n", client_pid);
+			ft_printf("Recived client PID: %d\n", client_pid);
 			bit_count = sizeof(pid_t) * 8 - 1;
 		}
 	}
 	else
 	{
 		if (signum == SIGUSR1)
+		{
 			character |= (1 << char_bit_count++);
+			kill(client_pid, SIGUSR1);
+		}
 		if (signum == SIGUSR2)
+		{
 			character |= (0 << char_bit_count++);
+			kill(client_pid, SIGUSR1);
+		}
 		if (char_bit_count == 8)
 		{
-			ft_printf("%c", character);
+			if (character == '\0')
+			{
+				reciving_pid = 1;
+				client_pid = 0;
+				ft_printf("\n");
+			}
+			else
+			{
+				ft_printf("%c", character);
+				kill(client_pid, SIGUSR2);
+			}
 			char_bit_count = 0;
 			character = 0;
 		}
