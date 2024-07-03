@@ -1,11 +1,12 @@
 {
     "configurations": [
+        
     {
         "name": "(gdb) Launch",
         "type": "cppdbg",
         "request": "launch",
-        "program": "/nfs/homes/agorski/42_core/minitalk/src/a.out",
-        "args": ["79974", "testmessage"],
+        "program": "/home/agorski/42warsaw/42_core/minitalk/src/server",
+        "args": ["6077", "testmessage"],
         "stopAtEntry": false,
         "cwd": "${fileDirname}",
         "environment": [],

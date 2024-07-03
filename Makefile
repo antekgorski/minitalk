@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: agorski <agorski@student.42.fr>            +#+  +:+       +#+         #
+#    By: agorski <agorski@student.42warsaw.pl>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/01 15:54:12 by agorski           #+#    #+#              #
-#    Updated: 2024/07/01 18:47:36 by agorski          ###   ########.fr        #
+#    Updated: 2024/07/02 23:45:44 by agorski          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ CLIENT_BONUS = client_bonus
 SERVER_BONUS = server_bonus
 
 # Define compiler
-CC = gcc -Wall -Wextra -Werror -I
+CC = gcc -g -Wall -Wextra -Werror -I
 
 
 # Removing the files

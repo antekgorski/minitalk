@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   client.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agorski <agorski@student.42.fr>            +#+  +:+       +#+        */
+/*   By: agorski <agorski@student.42warsaw.pl>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 18:09:24 by agorski           #+#    #+#             */
-/*   Updated: 2024/07/02 21:09:52 by agorski          ###   ########.fr       */
+/*   Updated: 2024/07/03 00:15:59 by agorski          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int	send_pid(pid_t server_pid, pid_t client_pid)
 	int	i;
 	int	bit_count;
 
+	server_reply = 0;
 	bit_count = sizeof(pid_t) * 8 - 1;
 	while (bit_count >= 0)
 	{
@@ -34,7 +35,6 @@ int	send_pid(pid_t server_pid, pid_t client_pid)
 		usleep(1000);
 		bit_count--;
 	}
-	server_reply = 0;
 	i = 0;
 	while (!server_reply)
 	{
@@ -78,7 +78,8 @@ int	main(int ac, char **av)
 	server_pid = ft_atoi(av[1]);
 	client_pid = getpid();
 	ft_printf("PID: %d\n", client_pid);
-	if (ac == 3 && (send_pid(server_pid, client_pid)))
+	send_pid(server_pid, client_pid);
+	if (ac == 3)
 	{
 		message = av[2];
 		while (*message != '\0')
