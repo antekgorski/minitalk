@@ -6,7 +6,7 @@
 #    By: agorski <agorski@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/01 15:54:12 by agorski           #+#    #+#              #
-#    Updated: 2024/07/03 14:53:04 by agorski          ###   ########.fr        #
+#    Updated: 2024/07/04 16:13:25 by agorski          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,6 +42,9 @@ OBJ_SERVER = $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SERVER)))
 OBJ_CLIENT_BONUS = $(addprefix $(OBJ_DIR), $(addsuffix .o, $(CLIENT_BONUS)))
 OBJ_SERVER_BONUS = $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SERVER_BONUS)))
 
+all: $(CLIENT) $(SERVER)
+
+bonus: $(CLIENT_BONUS) $(SERVER_BONUS)
 
 start:
 	@make all
@@ -56,7 +59,6 @@ $(FT_PRINTF):
 	@make -C ./lib/printf
 
 
-all: $(CLIENT) $(SERVER)
 
 
 $(CLIENT):	$(OBJ_CLIENT) $(LIBFT) $(FT_PRINTF)
@@ -65,7 +67,6 @@ $(CLIENT):	$(OBJ_CLIENT) $(LIBFT) $(FT_PRINTF)
 $(SERVER):	$(OBJ_SERVER) $(LIBFT) $(FT_PRINTF)
 			@$(CC) $(INC_DIR) $(OBJ_SERVER) $(LIBFT) $(FT_PRINTF) -o $(SERVER)
 
-bonus: $(CLIENT_BONUS) $(SERVER_BONUS)
 
 $(CLIENT_BONUS):	$(OBJ_CLIENT_BONUS) $(LIBFT) $(FT_PRINTF)
 					@$(CC) $(INC_DIR) $(OBJ_CLIENT_BONUS) $(LIBFT) $(FT_PRINTF) -o $(CLIENT_BONUS)
